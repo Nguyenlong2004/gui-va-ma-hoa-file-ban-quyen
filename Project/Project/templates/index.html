@@ -1,0 +1,87 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Encryptor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            padding: 0;
+            margin: 0;
+        }
+        h1 { text-align: center; padding: 30px 0; color: #ffe600; }
+        form {
+            background: #ffffff0d;
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            margin-bottom: 50px;
+        }
+        h2 { color: #ffd86b; }
+        label { display: block; margin: 15px 0 5px; font-weight: bold; }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: none;
+        }
+        input[type="submit"] {
+            background: #00cec9;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #01a3a4;
+        }
+        .links {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .links a {
+            color: #fddb3a;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>File Encryption Web</h1>
+
+    <form action="/encrypt" method="post" enctype="multipart/form-data">
+        <h2>🔐 Gửi file</h2>
+        <label for="file">Chọn file:</label>
+        <input type="file" name="file" required>
+
+        <label for="metadata">Metadata (JSON):</label>
+        <textarea name="metadata" rows="4" required>{ "filename": "example.txt", "copyright": "MyCompany" }</textarea>
+
+        <label for="mode">Chế độ mã hóa:</label>
+        <select name="mode">
+            <option value="encrypt-sign">Mã hóa + Ký</option>
+            <option value="encrypt-only">Chỉ mã hóa</option>
+        </select>
+
+        <input type="submit" value="Mã hóa & Gửi">
+    </form>
+
+    <form action="/decrypt" method="post" enctype="multipart/form-data">
+        <h2>🔓 Nhận file</h2>
+        <label for="enc_file">Tải file mã hóa:</label>
+        <input type="file" name="enc_file" required>
+        <input type="submit" value="Giải mã file">
+    </form>
+
+    <div class="links">
+        <a href="/view-metadata" target="_blank">📄 Xem Metadata đã giải mã</a>
+        <a href="/view-packet" target="_blank">📦 Xem gói mã hóa</a>
+    </div>
+</body>
+</html>
